@@ -30,6 +30,11 @@ bool isPalindrome(int num) {
   return reverse == num ; // return true if reverse = num , return false if reverse != num.
   } 
 
+/* better ; 
+bool isPolindrome(int num){
+return reverseNumber(num) == num;
+}*/
+
 bool isPrime(int num){
 	if (num <=1 ){
 		return false; // because negatives numbers are never prime && 0 &&1
@@ -82,6 +87,12 @@ bool isEven(int num){
 	}
 }
 
+/* 
+bool isEven(int num){
+return num%2 == 0;
+}
+*/
+
 //intermediate
 
 void primeFactors(int num) {
@@ -102,8 +113,13 @@ void primeFactors(int num) {
 bool isArmstrong(int num){
 	int s = 0 ;
 	int n = num ;
+	int i = num , digits = 0 ;
+	while (i>0){
+		i/=10;
+		digits+=1;
+	} 
 	while (num != 0){
-		s = s + pow(num%10 ,3); // the sum of digits if the number while each digit is to the power of 3 / using the lib <math.h>
+		s = s + pow(num%10 ,digits); // the sum of digits if the number while each digit is to the power of 3 / using the lib <math.h>
 		num = num/10;
 	}
 	if (s == n ){
@@ -112,7 +128,7 @@ bool isArmstrong(int num){
 	else { 
 	return false ;
 	}
-}
+}// or return s==n ( instead of all of the conditional if)
 void fibonacciSeries(int n){
 	int a=0 , b=1 , j , i ;  // we assume that the first numbers in the serie are a=0 and b=1 as there is no clue in the project paper if we should put them as inputs.
 	 if (n >= 1) printf("%d ", a); // Print the first term
@@ -260,7 +276,7 @@ int sumEvenFibonacci(int n){
 return s;
 }
 
-bool isHarshad(int num){  // using the function SumOfDigits(int num) , we checks if the num is divisible by the sum of its digits 
+bool isHarshad(int num){  // using the function SumOfDigits(int num) , we check if the num is divisible by the sum of its digits 
 	return num%SumOfDigits(num)==0;
 }
 
@@ -287,8 +303,8 @@ void pascalTriangle(int n) {
 }
 
 unsigned long bellNumber(int n){
-	 unsigned long current = 1, previous = 1, temp;
-	 int i ,j;
+ unsigned long current = 1, previous = 1, temp;
+	int i ,j;
     for(i = 1; i <= n; i++){
         temp = current;
         for ( j = 1; j < i; j++) {
@@ -298,7 +314,15 @@ unsigned long bellNumber(int n){
         current = temp;
     }
     return current;
+} 
+/*
+unsigned long bellNumber(int n, int k) {
+    if (n == 0) return 1; 
+    if (k == n) return 0; 
+    return bellNumber(n - 1, 0) + bellNumber(n - 1, k + 1) * (n - 1 - k) / (k + 1);
 }
+*/
+
 
 bool isKaprekar(int num){
     if (num == 1) return 1; // Special case for 1
@@ -597,7 +621,7 @@ void insertionSort(int arr[], int size){
  	j=i;
  	while(j>0 && arr[j-1]>arr[j]){
  		temp = arr[j];
-		arr[j]=arr[j-1];
+		arr[j]=arr[j-1]; 
 		arr[j-1]=temp;
 		 j=j-1; 
 	 }
@@ -613,6 +637,33 @@ void inputArray(int arr[], int size) {
     }
 }
 
+/*
+//advanced  array functions
+int findMissingNumber(int arr[], int size){
+	
+	int i;
+	for (i=0 ; i< size; i++){
+		if (arr[i]!=i){
+			return i;
+		}
+	}
+}
+
+void findPairsWithSum(int arr[], int size, int sum){
+	int i, j;
+	for(i=0; i<size ; i++){
+		for (j=i; j<size;j++){
+			if(arr[i]+arr[j]==sum){
+				printf("%d and %d \n", arr[i] , arr[j]);
+			}
+		}
+	} 	
+}
+
+void findSubArrayWithSum(int arr[], int size , int sum){
+	
+} 
+*/
 
 void printMainMenu() {
     printf("\n----- Main Menu -----\n");
@@ -1155,6 +1206,3 @@ int main() {
 }
 }
 }
-
-
-
